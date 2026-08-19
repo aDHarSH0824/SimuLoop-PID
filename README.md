@@ -1,6 +1,13 @@
 # SimuLoop-PID: Interactive Web-Based PID Controller & Motor Simulator
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-00f0ff?style=for-the-badge&logo=github)](https://aDHarSH0824.github.io/SimuLoop-PID/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/aDHarSH0824/SimuLoop-PID)
+
 SimuLoop-PID is a real-time web-based simulation environment for studying closed-loop feedback control systems, electromechanical motor dynamics, and sub-micron positioning stages.
+
+🌐 **Live Web Application**: [https://aDHarSH0824.github.io/SimuLoop-PID/](https://aDHarSH0824.github.io/SimuLoop-PID/)
+
+---
 
 ## Features
 
@@ -27,7 +34,7 @@ SimuLoop-PID is a real-time web-based simulation environment for studying closed
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/SimuLoop-PID.git
+git clone https://github.com/aDHarSH0824/SimuLoop-PID.git
 cd SimuLoop-PID
 npm install
 ```
@@ -40,10 +47,8 @@ npm run dev
 
 Open `http://localhost:3000/` in your browser.
 
-### Production Build
+### Deploy to GitHub Pages
 
 ```bash
-npm run build
+npm run deploy
 ```
-
-The output bundle will be generated in the `dist/` directory, ready for deployment on GitHub Pages, Vercel, or Netlify.

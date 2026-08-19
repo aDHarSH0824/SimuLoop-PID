@@ -9,11 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <!-- KaTeX for math equation rendering -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-  <script type="module" crossorigin src="./assets/index-gIziymA8.js"></script>
+  <script type="module" crossorigin src="./assets/index-CTgImYdG.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-CAry6_JF.css">
 </head>
 <body class="bg-obsidian text-slate-100 font-sans antialiased">
@@ -44,12 +40,6 @@
           ⚡ Velocity Control (RPM)
         </button>
       </div>
-    </div>
-
-    <div class="header-right">
-      <button class="btn-primary-glow" id="btn-open-modal">
-        📘 Control Systems Interview Guide
-      </button>
     </div>
   </header>
 
@@ -262,116 +252,6 @@
     </section>
 
   </main>
-
-  <!-- Control Systems Interview Quick Reference Guide Modal -->
-  <div class="modal-overlay hidden" id="reference-modal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h2 class="modal-title">📘 Control Systems Engineering Quick Reference Guide</h2>
-        <button class="modal-close-btn" id="btn-close-modal">&times;</button>
-      </div>
-
-      <!-- Modal Tabs -->
-      <div class="modal-tabs">
-        <button class="modal-tab-btn active" data-tab="pid-math">1. PID Fundamentals</button>
-        <button class="modal-tab-btn" data-tab="tuning">2. Ziegler-Nichols & Tuning</button>
-        <button class="modal-tab-btn" data-tab="anti-windup">3. Anti-Windup & Filtering</button>
-        <button class="modal-tab-btn" data-tab="robotome">4. RoboTome Medical Context</button>
-      </div>
-
-      <!-- Modal Body Tab Contents -->
-      <div class="modal-body">
-
-        <!-- Tab 1: PID Math -->
-        <div class="modal-tab-panel" id="tab-pid-math">
-          <h3>Continuous & Discrete PID Control Equations</h3>
-          <p>The time-domain continuous control signal \(u(t)\) is defined by:</p>
-          <div class="math-block">
-            \[ u(t) = K_p \, e(t) + K_i \int_{0}^{t} e(\tau) \, d\tau + K_d \, \frac{de(t)}{dt} \]
-          </div>
-          <p>Taking the Laplace Transform yields the transfer function \(G_c(s)\):</p>
-          <div class="math-block">
-            \[ G_c(s) = K_p + \frac{K_i}{s} + K_d s = \frac{K_d s^2 + K_p s + K_i}{s} \]
-          </div>
-          <ul class="bullet-list">
-            <li><strong>Proportional Term (\(K_p\)):</strong> Generates control action proportional to current error. Increases bandwidth and speeds up response, but higher values lead to overshoot and instability.</li>
-            <li><strong>Integral Term (\(K_i\)):</strong> Accumulates historical error over time. Eliminates steady-state error (\(e_{ss} \to 0\)) for type-1 step responses.</li>
-            <li><strong>Derivative Term (\(K_d\)):</strong> Anticipates future error trajectory based on current rate of change. Adds phase lead (damping), suppressing overshoot and stabilizing oscillations.</li>
-          </ul>
-        </div>
-
-        <!-- Tab 2: Ziegler-Nichols -->
-        <div class="modal-tab-panel hidden" id="tab-tuning">
-          <h3>Ziegler-Nichols Closed-Loop Frequency Response Method</h3>
-          <ol class="bullet-list">
-            <li>Set \(K_i = 0\) and \(K_d = 0\). Gradually increase \(K_p\) until the system reaches sustained, un-damped oscillation.</li>
-            <li>Record this gain as the <strong>Ultimate Gain (\(K_u\))</strong> and measure the period of oscillation as the <strong>Ultimate Period (\(T_u\))</strong>.</li>
-            <li>Calculate PID parameters using the standard tuning table below:</li>
-          </ol>
-
-          <table class="ref-table">
-            <thead>
-              <tr>
-                <th>Controller Type</th>
-                <th>\(K_p\)</th>
-                <th>\(K_i\) (or \(T_i\))</th>
-                <th>\(K_d\) (or \(T_d\))</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>P Controller</strong></td>
-                <td>\(0.50 \, K_u\)</td>
-                <td>—</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td><strong>PI Controller</strong></td>
-                <td>\(0.45 \, K_u\)</td>
-                <td>\(1.20 \, K_p / T_u\)</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td><strong>Classic PID</strong></td>
-                <td>\(0.60 \, K_u\)</td>
-                <td>\(2.00 \, K_p / T_u\)</td>
-                <td>\(K_p \, T_u / 8\)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Tab 3: Anti-Windup & Noise Filtering -->
-        <div class="modal-tab-panel hidden" id="tab-anti-windup">
-          <h3>Practical Control Engineering Solutions</h3>
-          
-          <h4>1. Integrator Anti-Windup (Clamping)</h4>
-          <p>When actuator output saturates at maximum supply limits (\(\pm V_{max}\)), large accumulated integral error causes severe overshoot and delayed recovery. Anti-windup clamping halts integral accumulation whenever the control signal is saturated unless the error opposes saturation.</p>
-
-          <h4>2. Derivative Kick Mitigation</h4>
-          <p>A sudden step change in target setpoint \(r(t)\) produces an instantaneous infinite error derivative \(\frac{de}{dt}\), causing a huge control pulse ("derivative kick"). Computing derivative on measurement (\(-\frac{dy}{dt}\)) removes setpoint step spikes while retaining damping during load disturbances.</p>
-
-          <h4>3. Low-Pass Derivative Filter</h4>
-          <p>Raw digital differentiation amplifies high-frequency sensor noise. We pass the derivative term through a first-order low-pass filter with time constant \(\tau_f\):</p>
-          <div class="math-block">
-            \[ D(s) = \frac{K_d \, s}{1 + \tau_f s} \]
-          </div>
-        </div>
-
-        <!-- Tab 4: Medical Context RoboTome -->
-        <div class="modal-tab-panel hidden" id="tab-robotome">
-          <h3>Real-World Focus: Sub-Micron Precision in Morphle Labs RoboTome</h3>
-          <p>In high-throughput automated pathology micro-scanners like Morphle Labs' RoboTome, tissue slide stages require precise sub-micron closed-loop positioning under dynamic physical conditions:</p>
-          <ul class="bullet-list">
-            <li><strong>Friction & Load Disturbance Rejection:</strong> Slide carrier momentum and mechanical stage friction act as external torque disturbances. A well-tuned PID controller rejects disturbance pulses without specimen vibration.</li>
-            <li><strong>High-Resolution Optical Encoder Feedback:</strong> Optical scale encoders feed quadrature pulses to the micro-controller loop at up to 1 kHz update rates.</li>
-            <li><strong>Zero Steady-State Error Requirement:</strong> Microscopic focal planes require precise zero position error (\(e_{ss} = 0\)) so tissue scans remain perfectly in focus across continuous scanning trajectories.</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>

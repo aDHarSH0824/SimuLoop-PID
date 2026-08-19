@@ -4,7 +4,6 @@ import { HardwareCanvas, VisualViewMode } from './canvas.js';
 import { ChartManager } from './chartManager.js';
 import { PerformanceAnalyzer } from './metrics.js';
 import { TuningPresets } from './presets.js';
-import { ModalManager } from './modal.js';
 
 class App {
   constructor() {
@@ -42,7 +41,6 @@ class App {
     this.canvas = new HardwareCanvas('hardware-canvas');
     this.chart = new ChartManager('oscilloscope-chart', { maxDataPoints: 250 });
     this.metrics = new PerformanceAnalyzer();
-    this.modal = new ModalManager();
   }
 
   initUIElements() {
